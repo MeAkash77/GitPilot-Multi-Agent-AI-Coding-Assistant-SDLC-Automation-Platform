@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="__CSP__" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitPilot Sidebar</title>
+  <link rel="stylesheet" href="__CSS_URI__" />
+</head>
+<body>
+  <div class="gp-sidebar">
+    <header class="gp-sidebar-header">
+      <div class="gp-title-row">
+        <div class="gp-product">
+          <span class="gp-product-name">GitPilot</span>
+          <span
+            class="gp-connection-dot is-disconnected"
+            id="connection-dot"
+            role="status"
+            aria-label="Disconnected"
+            title="Disconnected"
+          ></span>
+        </div>
+
+        <div class="gp-toolbar" aria-label="GitPilot actions">
+          <button class="gp-icon-btn" id="new-chat-btn" type="button" title="New chat" aria-label="New chat">
+            <span aria-hidden="true">＋</span>
+          </button>
+          <button class="gp-icon-btn" id="open-workspace-btn" type="button" title="Open folder" aria-label="Open folder">
+            <span aria-hidden="true">↗</span>
+          </button>
+          <button class="gp-icon-btn" id="settings-header-btn" type="button" title="Settings" aria-label="Settings">
+            <span aria-hidden="true">⚙</span>
+          </button>
+        </div>
+      </div>
+
+      <button class="gp-provider-line" id="provider-setup-btn" type="button" title="Configure provider and model">
+        <span id="provider-line">Provider state</span>
+      </button>
+
+      <div class="gp-repository-row">
+        <div class="gp-repository-line" id="repo-line" title="Repository state">Repository state</div>
+        <button class="gp-index-status" id="refresh-context-card" type="button" title="Refresh project context" aria-label="Refresh project context">
+          <span class="gp-index-check" aria-hidden="true">✓</span>
+          <span class="gp-index-label">Indexed</span>
+          <span class="gp-index-refresh" aria-hidden="true">↻</span>
+        </button>
+      </div>
+
+      <!-- Compatibility nodes retained for the existing state renderer. -->
+      <div class="gp-header-meta hidden" aria-hidden="true">
+        <span id="connection-pill"></span>
+        <span id="task-pill"></span>
+      </div>
+    </header>
+
+    <main class="gp-conversation" id="conversation">
+      <div class="notice-banner error-banner hidden" id="error-banner" role="alert">
+        <span id="error-copy"></span>
+      </div>
+
+      <section class="gp-inline-card gp-task-summary hidden" id="assistant-summary-section" aria-live="polite">
+        <div class="section-head">
+          <h2 class="section-title">Task status</h2>
+          <span class="pill" id="task-status-pill"></span>
+        </div>
+        <div class="summary-card">
+          <div class="summary-title" id="task-title"></div>
+          <span class="pill hidden" id="task-step-pill"></span>
+          <div class="summary-note" id="task-summary"></div>
+          <div class="progress hidden" id="task-progress">
+            <div class="progress-track">
+              <div class="progress-bar" id="task-progress-bar"></div>
+            </div>
+            <div class="progress-label" id="task-progress-label"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Legacy/compatibility sections. They remain hidden until state requires them. -->
+      <section class="hidden" id="overview-section"></section>
+      <section class="hidden" id="advanced-tools">
+        <button id="contextual-btn" type="button" data-action="apply">Action</button>
+      </section>
+      <button class="hidden" id="setup-context-btn" type="button">Set up project context</button>
+      <button class="hidden" id="idle-setup-btn" type="button">Setup Wizard</button>
+
+      <section class="gp-inline-card hidden" id="idle-recent-section">
+        <div class="section-head">
+          <h2 class="section-title">Recent files</h2>
+        </div>
+        <ul class="list" id="recent-files-list"></ul>
+      </section>
+
+      <section class="gp-chat-section" id="chat-section">
+        <div class="chat-empty-state gp-empty-state" id="chat-empty-state">
+          <div class="gp-avatar-orbit" aria-hidden="true">
+            <span class="gp-orbit-ring gp-orbit-ring-one"></span>
+            <span class="gp-orbit-ring gp-orbit-ring-two"></span>
+            <div class="empty-icon gp-avatar">GP</div>
+          </div>
+
+          <div class="gp-empty-copy">
+            <h2 class="empty-heading">What can I help you with?</h2>
+            <p class="empty-subtext">Ask GitPilot to explain, review, change, secure, or test your project.</p>
+          </div>
+
+          <div class="gp-suggestion-grid empty-suggestions">
+            <button class="suggestion-chip" type="button" data-quick-action="explain_project">
+              <span class="gp-suggestion-icon" aria-hidden="true">▤</span>
+              <span>Explain project</span>
+            </button>
+            <button class="suggestion-chip" type="button" data-quick-action="review_file">
+              <span class="gp-suggestion-icon" aria-hidden="true">‹/›</span>
+              <span>Review file</span>
+            </button>
+            <button class="suggestion-chip" type="button" data-suggestion="Find potential bugs in the codebase">
+              <span class="gp-suggestion-icon" aria-hidden="true">♧</span>
+              <span>Find bugs</span>
+            </button>
+            <button class="suggestion-chip" type="button" data-quick-action="generate_tests">
+              <span class="gp-suggestion-icon" aria-hidden="true">△</span>
+              <span>Write tests</span>
+            </button>
+          </div>
+        </div>
+
+        <ul class="chat-list hidden" id="chat-list" aria-live="polite" aria-relevant="additions text" aria-label="GitPilot conversation"></ul>
+      </section>
+
+      <section class="approval-card gp-inline-card hidden" id="approval-card" aria-live="assertive">
+        <div class="approval-header">
+          <strong class="approval-title" id="approval-title"></strong>
+          <span class="pill approval-risk" id="approval-risk"></span>
+        </div>
+        <div class="approval-body">
+          <p class="approval-summary" id="approval-summary"></p>
+          <pre class="approval-diff hidden" id="approval-diff"></pre>
+        </div>
+        <div class="approval-actions">
+          <button id="approval-allow" type="button">Allow</button>
+          <button class="secondary" id="approval-allow-session" type="button">Allow for session</button>
+          <button class="ghost" id="approval-deny" type="button">Deny</button>
+        </div>
+      </section>
+
+      <section class="tool-activity-feed gp-inline-card hidden" id="tool-activity-feed" aria-live="polite">
+        <div class="section-head">
+          <h2 class="section-title">Agent activity</h2>
+        </div>
+        <ul class="activity-list" id="activity-list"></ul>
+      </section>
+
+      <section class="terminal-panel gp-inline-card hidden" id="terminal-panel">
+        <div class="terminal-panel-header">
+          <span class="section-title">Terminal</span>
+          <button class="quiet" id="terminal-close" type="button">Close</button>
+        </div>
+        <pre class="terminal-output" id="terminal-output"></pre>
+      </section>
+
+      <section class="results-bar gp-inline-card hidden" id="results-bar" aria-live="polite">
+        <span class="test-badge passed hidden" id="test-passed-badge"></span>
+        <span class="test-badge failed hidden" id="test-failed-badge"></span>
+        <span class="test-badge skipped hidden" id="test-skipped-badge"></span>
+        <span class="diag-badge errors hidden" id="diag-errors-badge"></span>
+        <span class="diag-badge warnings hidden" id="diag-warnings-badge"></span>
+      </section>
+
+      <section class="gp-inline-card hidden" id="plan-section">
+        <details class="disclosure" id="plan-disclosure" open>
+          <summary>
+            <span class="summary-label">Execution plan</span>
+            <span class="chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="disclosure-body">
+            <ul class="list" id="plan-list"></ul>
+          </div>
+        </details>
+        <div class="plan-approval hidden" id="plan-approval-bar">
+          <p class="plan-approval__text">Review the plan before GitPilot starts modifying files.</p>
+          <div class="plan-approval__actions">
+            <button id="plan-approve-btn" type="button">Approve &amp; execute</button>
+            <button class="ghost" id="plan-reject-btn" type="button">Reject</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="gp-inline-card hidden" id="scope-section">
+        <details class="disclosure" id="scope-disclosure" open>
+          <summary>
+            <span class="summary-label">Files in scope</span>
+            <span class="chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="disclosure-body">
+            <ul class="list" id="scope-list"></ul>
+          </div>
+        </details>
+      </section>
+
+      <section class="gp-inline-card hidden" id="changes-section">
+        <details class="disclosure" id="changes-disclosure" open>
+          <summary>
+            <span class="summary-label">Changes</span>
+            <span class="chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="disclosure-body">
+            <ul class="list" id="changes-list"></ul>
+          </div>
+        </details>
+      </section>
+
+      <section class="gp-inline-card hidden" id="actions-section">
+        <details class="disclosure" id="task-controls-disclosure">
+          <summary>
+            <span class="summary-label">Task controls</span>
+            <span class="chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="disclosure-body secondary-row">
+            <button class="secondary" id="replan-btn" type="button">Regenerate plan</button>
+            <button class="ghost" id="setup-btn" type="button">Setup</button>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <footer class="gp-composer">
+      <div class="gp-input-shell">
+        <textarea id="chat-input" rows="1" placeholder="Describe the task, ask a question, or request a change…" aria-label="Message GitPilot"></textarea>
+        <div class="gp-input-actions">
+          <button id="send-btn" type="button" aria-label="Send message" title="Send message">
+            <span class="gp-send-icon" aria-hidden="true">➤</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="gp-compose-hint" id="compose-hint">Enter to send · Shift+Enter for a new line</div>
+
+      <div class="gp-composer-footer">
+        <div class="gp-task-status" role="status">
+          <span class="gp-status-dot" id="task-status-dot"></span>
+          <span id="compose-status">Ready</span>
+        </div>
+
+        <div class="mode-selector gp-mode-selector" id="mode-selector" role="radiogroup" aria-label="Execution mode">
+          <button class="mode-btn active" id="mode-ask" data-mode="ask" role="radio" aria-checked="true" type="button" title="Ask before risky actions">Ask</button>
+          <button class="mode-btn" id="mode-plan" data-mode="plan" role="radio" aria-checked="false" type="button" title="Plan without writing files">Plan</button>
+          <button class="mode-btn" id="mode-auto" data-mode="auto" role="radio" aria-checked="false" type="button" title="Run with configured approvals">Auto</button>
+        </div>
+      </div>
+
+      <div class="secondary-row hidden" id="secondary-actions-row">
+        <button id="apply-btn" type="button">Apply patch</button>
+        <button class="ghost" id="revert-btn" type="button">Revert</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Kept for compatibility; the inline animated thinking bubble is the main busy indicator. -->
+  <div class="busy-overlay" id="busy-overlay" aria-live="polite" aria-hidden="true">
+    <span class="spinner" aria-hidden="true"></span>
+    <span class="busy-text" id="busy-text">Working…</span>
+  </div>
+
+  <script nonce="__NONCE__" src="__SCRIPT_URI__"></script>
+</body>
+</html>

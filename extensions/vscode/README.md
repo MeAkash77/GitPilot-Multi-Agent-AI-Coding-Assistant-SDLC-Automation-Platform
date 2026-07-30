@@ -1,0 +1,172 @@
+<div align="center">
+
+# GitPilot for VS Code
+
+### Not a chatbot. A team of AI agents that code together.
+
+Most AI coding tools are a single model guessing at your codebase. GitPilot is different: **four specialized agents** collaborate on every task — one explores your repo, one plans safe changes, one writes the code and runs your tests, and one reviews the result. You approve every step.
+
+**Open source · Multi-agent · Any LLM · Free with Ollama · Enterprise-ready**
+
+</div>
+
+### How is this different from Copilot, Cursor, or Cody?
+
+| | Single-model tools | **GitPilot** |
+|---|---|---|
+| Architecture | One model, one prompt | **4 specialized agents** working as a team |
+| Context | Reads the open file | **Explores** your full repo, git history, tests |
+| Safety | Suggests code inline | **Plans first**, shows diffs, waits for approval |
+| Testing | You run tests manually | **Runs your test suite** and self-corrects on failure |
+| Lock-in | One vendor | **Any LLM**: OpenAI, Claude, Ollama, Watsonx, OllaBridge |
+| Privacy | Cloud-only | **Fully local** with Ollama — nothing leaves your machine |
+| Source | Proprietary | **Apache 2.0 open source** — fork it, audit it, extend it |
+
+---
+
+## Quick Start
+
+```bash
+pip install gitcopilot      # install the backend (one-time)
+gitpilot serve              # start the AI server locally
+```
+
+Then in VS Code:
+
+1. **Install** "GitPilot" from the Extensions Marketplace
+2. **Click** the GitPilot icon in the sidebar
+3. **Choose** your AI provider (Ollama is free and local — no API key needed)
+4. **Ask** anything: *"Explain this project"*, *"Fix the bug in login.ts"*, *"Write tests for auth"*
+
+That's it. No account required. No data leaves your machine unless you choose a cloud provider.
+
+> **Requirements**: Python 3.11 or 3.12 · VS Code 1.110+ · The PyPI package is **`gitcopilot`** (the CLI command is `gitpilot`)
+
+---
+
+## What Can GitPilot Do?
+
+### Chat
+
+Type a question or request in the chat panel. GitPilot reads your project, creates a plan, and writes the code.
+
+**Try these:**
+- "Explain this project's architecture"
+- "Review the current file for issues"
+- "Add error handling to the API endpoints"
+- "Write tests for the auth module"
+
+### Quick Actions
+
+One-click buttons in the sidebar:
+
+| Button | What it does |
+|---|---|
+| **Explain Project** | Summarizes your entire codebase |
+| **Review File** | Finds bugs and improvements in the open file |
+| **Fix Selection** | Fixes the selected code |
+| **Generate Tests** | Creates tests for the selected code |
+| **Security Scan** | Checks for vulnerabilities |
+
+### Code Intelligence
+
+- **CodeLens** hints appear above functions: click "Explain" or "Review"
+- **Right-click menu** on selected code: Explain, Review, Fix, Test
+- **Command Palette** (`Ctrl+Shift+P`): search "GitPilot"
+
+### Git
+
+- **Smart Commit**: generates commit messages from your changes
+- **Branch Manager**: create, merge, compare branches
+- **Conflict Resolver**: AI-assisted merge conflict resolution
+
+---
+
+## Setup Your AI Provider
+
+GitPilot works with any of these providers:
+
+### Free (no API key needed)
+
+**Ollama** (local, private, fast):
+```
+1. Install Ollama: https://ollama.com
+2. Run: ollama pull llama3
+3. In GitPilot: click Provider > Ollama
+```
+
+**OllaBridge** (cloud, works out of the box):
+```
+1. In GitPilot: click Provider > OllaBridge
+2. It connects automatically (no setup needed)
+```
+
+### Paid (API key required)
+
+**OpenAI**:
+```
+1. Get an API key from https://platform.openai.com
+2. In GitPilot: click Provider > OpenAI
+3. Paste your API key
+```
+
+**Claude (Anthropic)**:
+```
+1. Get an API key from https://console.anthropic.com
+2. In GitPilot: click Provider > Claude
+3. Paste your API key
+```
+
+**IBM Watsonx**:
+```
+1. Get credentials from https://cloud.ibm.com
+2. In GitPilot: click Provider > Watsonx
+3. Add your API key and project ID
+```
+
+---
+
+## Settings
+
+Open settings: `Ctrl+Shift+P` > "Preferences: Open Settings" > search "gitpilot"
+
+| Setting | Default | What it does |
+|---|---|---|
+| `gitpilot.provider` | `ollabridge` | Which AI to use |
+| `gitpilot.codeLens.enabled` | `true` | Show Explain/Review hints |
+| `gitpilot.autoConnect` | `true` | Connect to server on startup |
+
+---
+
+## Troubleshooting
+
+**"Provider not configured"**
+Click the "Provider" button in the sidebar header and select your AI provider.
+
+**"Disconnected"**
+GitPilot needs a backend server running at `http://127.0.0.1:8000`.
+Install and start it with:
+```bash
+pip install gitcopilot
+gitpilot serve
+```
+The PyPI package is **`gitcopilot`** (the CLI is `gitpilot`). Requires Python 3.11 or 3.12.
+
+**"Version mismatch"**
+This VS Code extension (v0.2.x) requires **GitPilot backend v0.2.x** (`gitcopilot>=0.2.6`).
+Upgrade both together: `pip install --upgrade 'gitcopilot>=0.2.6'`.
+
+**Extension not loading?**
+Open the Output panel (`Ctrl+Shift+U`) and select "GitPilot" from the dropdown to see logs.
+
+---
+
+## Links
+
+- [GitHub](https://github.com/ruslanmv/gitpilot)
+- [Report a Bug](https://github.com/ruslanmv/gitpilot/issues)
+- [Full Documentation](https://github.com/ruslanmv/gitpilot/blob/main/extensions/vscode/EXTENSION_DOCS.md)
+
+---
+
+**Made by [Ruslan Magana Vsevolodovna](https://github.com/ruslanmv)** | Apache 2.0 | v0.2.6

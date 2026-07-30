@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="GitPilot">
+  <title>GitPilot</title>
+  <defs>
+    <!-- Warm orange gradient matching web theme.accent (#D95C3D → #ff7a3c) -->
+    <linearGradient id="gp-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff7a3c"/>
+      <stop offset="100%" style="stop-color:#D95C3D"/>
+    </linearGradient>
+
+    <!-- Soft radial glow for the core (same gradient used in StartupScreen) -->
+    <radialGradient id="gp-core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ff7a3c;stop-opacity:0.95"/>
+      <stop offset="72%" style="stop-color:#ff7a3c;stop-opacity:0.25"/>
+      <stop offset="100%" style="stop-color:#ff7a3c;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Card background: dark rounded square (theme.cardBg #1C1C1F with border #27272A) -->
+  <rect x="4" y="4" width="192" height="192" rx="32" ry="32" fill="#1C1C1F"/>
+  <rect x="4" y="4" width="192" height="192" rx="32" ry="32" fill="none" stroke="#27272A" stroke-width="1"/>
+
+  <!-- Outer progress ring: subtle orange glow (matches StartupScreen brand-ring) -->
+  <circle cx="100" cy="100" r="72" fill="none" stroke="#ff7a3c" stroke-width="3" stroke-opacity="0.22"/>
+
+  <!-- Active ring arc: bright accent stroke from top-right (the "live" indicator) -->
+  <path
+    d="M 100 28 A 72 72 0 0 1 172 100"
+    fill="none"
+    stroke="url(#gp-accent)"
+    stroke-width="4"
+    stroke-linecap="round"
+  />
+
+  <!-- Inner core: soft radial glow -->
+  <circle cx="100" cy="100" r="56" fill="url(#gp-core)" opacity="0.18"/>
+
+  <!-- GP monogram: same tone as theme.textPrimary #EDEDED -->
+  <text
+    x="100"
+    y="120"
+    text-anchor="middle"
+    font-family='"Söhne", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+    font-size="56"
+    font-weight="700"
+    fill="#EDEDED"
+    letter-spacing="-2"
+  >GP</text>
+</svg>
