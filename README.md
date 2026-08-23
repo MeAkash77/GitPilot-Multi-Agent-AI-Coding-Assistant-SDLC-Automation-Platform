@@ -31,7 +31,7 @@ Multiple specialized agents — including Explorer, Planner, Coder, and Reviewer
 
 Most AI coding tools are a **single model behind a chat box**. GitPilot is fundamentally different: it deploys a **team of four specialized AI agents** that collaborate on every task — just like a real engineering team.
 
-> **Matrix‑native:** GitPilot is the worker for [Matrix Builder](https://github.com/agent-matrix/matrix-builder) — it runs a signed Matrix Bundle under contract via `POST /api/v1/gitpilot/runs` (A2A‑secured), returns a controlled diff, and never approves or commits its own work.
+> **Matrix‑native:** GitPilot is the worker for [Matrix Builder](https://github.com/MeAkash77/GitPilot-Multi-Agent-AI-Coding-Assistant-SDLC-Automation-Platform.git) — it runs a signed Matrix Bundle under contract via `POST /api/v1/gitpilot/runs` (A2A‑secured), returns a controlled diff, and never approves or commits its own work.
 
 | Agent | Role | What it does |
 |---|---|---|
@@ -98,7 +98,7 @@ Install the extension, configure your LLM, and start chatting:
 Run the full web interface with Docker:
 
 ```bash
-git clone https://github.com/ruslanmv/gitpilot.git
+git clone https://github.com/MeAkash77/GitPilot-Multi-Agent-AI-Coding-Assistant-SDLC-Automation-Platform.git
 cd gitpilot
 docker compose up
 ```
@@ -111,11 +111,6 @@ Experience the application in action through our hosted demo environment:
 
 [![Live Demo Preview](assets/2026-04-07-16-17-56.png)](https://huggingface.co/spaces/ruslanmv/gitpilot)
 
-🔗 **Access the live demo:**  
-
-[https://gitpilot.ruslanmv.com](https://gitpilot.ruslanmv.com)
-or in Hugging Face
-[https://huggingface.co/spaces/ruslanmv/gitpilot](https://huggingface.co/spaces/ruslanmv/gitpilot)
 
 ### Option 3: Python CLI (fastest)
 
@@ -413,9 +408,9 @@ Apache License 2.0. See [LICENSE](LICENSE).
 
 <div align="center">
 
-**GitPilot** is made by [Ruslan Magana Vsevolodovna](https://github.com/ruslanmv)
+**GitPilot** is made by [Akash](https://github.com/MeAkash77/GitPilot-Multi-Agent-AI-Coding-Assistant-SDLC-Automation-Platform.git)
 
-[Star on GitHub](https://github.com/ruslanmv/gitpilot) &#8226; [Report a Bug](https://github.com/ruslanmv/gitpilot/issues) &#8226; [Request a Feature](https://github.com/ruslanmv/gitpilot/issues)
+[Star on GitHub](https://github.com/MeAkash77/GitPilot-Multi-Agent-AI-Coding-Assistant-SDLC-Automation-Platform.git) &#8226; [Report a Bug](https://github.com/MeAkash77/GitPilot-Multi-Agent-AI-Coding-Assistant-SDLC-Automation-Platform.git) &#8226; [Request a Feature](https://github.com/MeAkash77/GitPilot-Multi-Agent-AI-Coding-Assistant-SDLC-Automation-Platform.git)
 
 </div>
 
